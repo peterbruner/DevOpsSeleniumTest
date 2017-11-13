@@ -12,18 +12,18 @@ import org.junit.*;
 
 import static org.junit.Assert.*;
 
-import java.util.concurrent.TimeUnit;
 /**
  * 
  *
  */
-public class FirefoxTest {
+public class Firefox {
 
 	private WebDriver driver;
 	private static final String NAME = "Admin";
 	private static final String EMAIL = "admin@deloittedev.ops";
 	private static final String PHONE = "123.456.7890";
 	
+	// use of stringbuilder to replace the @ is necessary for some browsers (but not IE)
 	StringBuilder sb = new StringBuilder(EMAIL);
 	String emailValue = sb.toString().replace("@", "%40");
 
@@ -40,24 +40,19 @@ public class FirefoxTest {
 	}
 
 	@Test
-	public void testGoogleSearch() {
+	public void testWebElements() {
 		// Find the text input element by its name or xpath
 		WebElement element1 = driver.findElement(By.name("name"));
 		WebElement element2 = driver.findElement(By.name("email"));
 		WebElement element3 = driver.findElement(By.name("phoneNumber"));
 		WebElement element4 = driver.findElement(By.xpath("/html/body/form/input[4]"));
 
-		// Clear the existing text value
-		element1.clear();
-		element2.clear();
-		element3.clear();
-
 		// Enter a value for each field
 		element1.sendKeys(NAME);
 		element2.sendKeys(EMAIL);
 		element3.sendKeys(PHONE);
 
-		// Now click the Submit button
+		// Click the Submit button
 		element4.click();		
 
 		// gets the URL from the second page, and checks to make sure it matches "http://10.118.45.4:8080/HelloWorld/hello?name="
