@@ -23,7 +23,7 @@ public class Firefox {
 	private static final String EMAIL = "admin@deloittedev.ops";
 	private static final String PHONE = "123.456.7890";
 	
-	// use of stringbuilder to replace the @ is necessary for some browsers (but not IE)
+	// use of stringbuilder to replace the @ is necessary for some browsers (not IE)
 	StringBuilder sb = new StringBuilder(EMAIL);
 	String emailValue = sb.toString().replace("@", "%40");
 
