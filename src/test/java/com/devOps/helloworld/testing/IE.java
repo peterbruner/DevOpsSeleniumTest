@@ -46,7 +46,7 @@ public class IE {
 		// Maximizes the browser
 		driver.manage().window().maximize();
 		// Navigate to the URL
-		driver.get("http://10.118.45.4:8080/HelloWorld/");
+		driver.get("http://localhost:8080/HelloWorld/");
 	  }
 	
 	@Test
@@ -69,12 +69,12 @@ public class IE {
 		// if it does not match, it will wait 10 seconds before failing
 		new WebDriverWait(driver, 20).until(new ExpectedCondition<Boolean>() {
 			public Boolean apply(WebDriver webD) {
-				return webD.getCurrentUrl().startsWith("http://10.118.45.4:8080/HelloWorld/hello?name=");
+				return webD.getCurrentUrl().startsWith("http://localhost:8080/HelloWorld/hello?name=");
 			}
 		});
 		
 		// asserts that the values entered properly create the new URL for the user
-		assertEquals("http://10.118.45.4:8080/HelloWorld/hello?name=" + NAME + "&email=" + EMAIL + "&phoneNumber=" + PHONE,
+		assertEquals("http://localhost:8080/HelloWorld/hello?name=" + NAME + "&email=" + EMAIL + "&phoneNumber=" + PHONE,
 				driver.getCurrentUrl());
 	}
 
