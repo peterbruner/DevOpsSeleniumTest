@@ -40,7 +40,7 @@ public class ChromeTest {
 		// Maximize the browser window
 		driver.manage().window().maximize();
 		// Navigate to HelloWorld
-		driver.get("http://10.118.45.4:8080/HelloWorld/");
+		driver.get("http://localhost:8080/HelloWorld/");
 	}
 
 	@Test
@@ -63,12 +63,12 @@ public class ChromeTest {
 		// if it does not match, it will wait 10 seconds before failing
 		new WebDriverWait(driver, 10).until(new ExpectedCondition<Boolean>() {
 			public Boolean apply(WebDriver webD) {
-				return webD.getCurrentUrl().startsWith("http://10.118.45.4:8080/HelloWorld/hello?name=");
+				return webD.getCurrentUrl().startsWith("http://localhost:8080/HelloWorld/hello?name=");
 			}
 		});
 		
 		// asserts that the values entered properly create the new URL for the user
-		assertEquals("http://10.118.45.4:8080/HelloWorld/hello?name=" + NAME + "&email=" + emailValue + "&phoneNumber=" + PHONE,
+		assertEquals("http://localhost:8080/HelloWorld/hello?name=" + NAME + "&email=" + emailValue + "&phoneNumber=" + PHONE,
 				driver.getCurrentUrl());
 	}
 
