@@ -1,4 +1,6 @@
+com\devOps\helloworld\testing\ChromeTest.class
 com\devOps\helloworld\testing\Firefox$1.class
-com\devOps\helloworld\testing\IETest.class
+com\devOps\helloworld\testing\DbTesting.class
 com\devOps\helloworld\testing\Firefox.class
-com\devOps\helloworld\testing\IETest$1.class
+com\devOps\helloworld\testing\IE.class
+com\devOps\helloworld\testing\IE$1.class
