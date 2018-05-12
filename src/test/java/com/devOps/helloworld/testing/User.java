@@ -17,6 +17,29 @@ public class User {
 	private String email;
 	private String phoneNumber;
 	
+	public User() {
+		
+	}
+	
+	public User(String firstName, String lastName, String userName, String password, String address1,
+			String address2, String city, String state, String zipcode, String country, String title, String email,
+			String phoneNumber) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.userName = userName;
+		this.password = password;
+		this.address1 = address1;
+		this.address2 = address2;
+		this.city = city;
+		this.state = state;
+		this.zipcode = zipcode;
+		this.country = country;
+		this.title = title;
+		this.email = email;
+		this.phoneNumber = phoneNumber;
+	}
+
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
@@ -119,5 +142,13 @@ public class User {
 
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
+	}
+	
+	public String getUserId() {
+		return userId;
+	}
+	
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 }

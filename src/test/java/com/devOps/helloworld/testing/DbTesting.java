@@ -52,7 +52,8 @@ class DbTesting {
 			statement = connect.createStatement();
 			resultSet = statement.executeQuery("Select [DevOps].[dbo].[Users].UserName, " 
 				+ "[DevOps].[dbo].[Users].LastName, "
-				+ "[DevOps].[dbo].[Users].FirstName "
+				+ "[DevOps].[dbo].[Users].FirstName, "
+				+ "[DevOps].[dbo].[Users].UserId "
 				+ "from [DevOps].[dbo].[Users]");
 			
 			ArrayList<User> users = new ArrayList<User>();
@@ -63,6 +64,7 @@ class DbTesting {
 				user.setUserName(resultSet.getString(1));
 				user.setLastName(resultSet.getString(2));
 				user.setFirstName(resultSet.getString(3));
+				user.setUserId(resultSet.getString(4));
 				users.add(user);
 			}
 			
@@ -79,32 +81,6 @@ class DbTesting {
 
 		}
 	}
-	
-//	public void readData() throws SQLException, ClassNotFoundException, Exception 
-//	{
-//		Connection connect = null;
-//		Statement statement = null;
-//		PreparedStatement preparedStatement = null;
-//		ResultSet resultSet = null;
-//		
-//		try 
-//		{
-//			//Class.forName("com.mysql.jdbc.Driver");
-//			connect = DriverManager.getConnection("jdbc:sqlserver://localhost;user=sadevops;password=zb4^1OL7&6mbh/F6T6YS5j!V");
-//			statement = connect.createStatement();
-//			resultSet = statement.executeQuery("Select * from users");
-//			System.out.println(resultSet.getString(1));
-//			
-//		}
-//		catch (Exception e)
-//		{
-//			throw e;
-//		}
-//		finally 
-//		{
-//
-//		}
-//	} //end readData()
 	
 //	public void writeData() throws Exception 
 //	{
