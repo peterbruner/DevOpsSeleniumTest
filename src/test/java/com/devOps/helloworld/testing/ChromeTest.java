@@ -14,6 +14,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.concurrent.TimeUnit;
+
 import org.junit.*;
 
 /**
@@ -72,24 +74,51 @@ public class ChromeTest {
 		WebElement element12 = driver.findElement(By.name("phoneNumber"));
 		WebElement element13 = driver.findElement(By.name("title"));
 		//WebElement element4 = driver.findElement(By.xpath("/html/body/form/input[4]"));
-		WebElement element14 = driver.findElement(By.className("btn")); //finds the first item of type btn
-		WebElement element15 = driver.findElement(By.className("btn")); //also finds the first item of type btn
+		WebElement element14 = driver.findElement(By.name("btnRegister")); //register button
+		WebElement element15 = driver.findElement(By.name("btnReset")); //reset button
+		WebElement element17 = driver.findElement(By.name("btnSubmit")); //admin button
 
 		// Enter a value for each field
-		element1.sendKeys(FIRSTNAME);
-		element2.sendKeys(LASTNAME);
-		element3.sendKeys(USERNAME);
-		element4.sendKeys(PASSWORD);
-		element16.sendKeys(PASSWORD);
-		element5.sendKeys(ADDRESS1);
-		element6.sendKeys(ADDRESS2);
-		element7.sendKeys(CITY);
-		element8.sendKeys(STATE);
-		element9.sendKeys(ZIPCODE);
-		element10.sendKeys(COUNTRY);
-		element11.sendKeys(EMAIL);
-		element12.sendKeys(PHONE);
-		element13.sendKeys(TITLE);
+		for (int loop = 0; loop < 2; loop++)
+		{
+			element1.sendKeys(FIRSTNAME);
+			element2.sendKeys(LASTNAME);
+			element3.sendKeys(USERNAME);
+			element4.sendKeys(PASSWORD);
+			element16.sendKeys(PASSWORD);
+			element5.sendKeys(ADDRESS1);
+			element6.sendKeys(ADDRESS2);
+			element7.sendKeys(CITY);
+			element8.sendKeys(STATE);
+			element9.sendKeys(ZIPCODE);
+			element10.sendKeys(COUNTRY);
+			element11.sendKeys(EMAIL);
+			element12.sendKeys(PHONE);
+			element13.sendKeys(TITLE);
+			if (loop == 0)
+			{
+				element15.click();
+			}
+			else {
+				element14.click();
+			}
+		}
+		
+		
+		
+		try {
+			DbTesting dbTest = new DbTesting();
+			dbTest.readData();
+		}
+		catch (Exception exception) {
+			exception.printStackTrace();
+		}
+		
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException exception) {
+			exception.printStackTrace();
+		}
 
 		// Click the Submit button
 		//element15.sendKeys(Keys.ENTER);		
