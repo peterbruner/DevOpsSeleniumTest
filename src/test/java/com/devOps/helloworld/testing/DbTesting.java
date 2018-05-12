@@ -81,36 +81,4 @@ class DbTesting {
 
 		}
 	}
-	
-//	public void writeData() throws Exception 
-//	{
-//		Connection connect = null;
-//		Statement statement = null;
-//		PreparedStatement preparedStatement = null;
-//		ResultSet resultSet = null;
-//		
-//		try 
-//		{
-//			final String connectionUrl = "jdbc:sqlserver://10.118.45.4;databaseName=DevOps;user=sadevops;password=zb4^1OL7&6mbh/F6T6YS5j!V";
-//			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-//			connect = DriverManager.getConnection(connectionUrl);
-//			statement = connect.createStatement();
-//			
-//			//dont need to do an Insert
-//			String sqlStatement = "Insert into [DevOps].[dbo].[Users] VALUES ('45', 'DOENT', 'John', 'jdoe', 'jdoe1', '123 some street', '','Somecity', 'va', 'USA', '22121', 'notitle', 'xxx', '111');";
-//			resultSet = statement.executeQuery(sqlStatement);
-//			
-//			
-//		}
-//		catch (Exception e)
-//		{
-//			throw e;
-//		}
-//		finally 
-//		{
-//
-//		}
-//	} //end writeData()
-	
-	
 }

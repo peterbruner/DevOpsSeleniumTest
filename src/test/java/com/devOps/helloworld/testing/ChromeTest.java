@@ -30,7 +30,7 @@ public class ChromeTest {
 	private WebDriver driver;
 	private User user1 = new User("Bruce", "Wayne", "b@tman", "cave", "1 Wayne way", "", "Gotham", "NY?", "10108", "USA", "CEO", "bruce@wayneenterprises.com", "555.555.5555");
 	private User user2 = new User("Peter", "Parker", "$piderman", "labratory", "123 Queens Ave", "", "New York City", "NY", "10108", "USA", "Student", "peter@empirestate.edu", "555.555.5555");
-	private User user3 = new User("Admin", "Istrator", "Professor1", "password_:(", "123 Not Main St", "#1", "Quahog", "MA", "10101", "USA", "Professor", "admin@deloittedev.ops", "123.456.7890");
+	//private User user3 = new User("Admin", "Istrator", "Professor1", "password_:(", "123 Not Main St", "#1", "Quahog", "MA", "10101", "USA", "Professor", "admin@deloittedev.ops", "123.456.7890");
 	private ArrayList<User> users = new ArrayList<User>();
 	private DbTesting dbTest = new DbTesting();
 	// use of stringbuilder to replace the @ is necessary for some browsers (not IE)
@@ -42,15 +42,9 @@ public class ChromeTest {
 		
 		// Points maven at the gecko driver necessary for using firefox
 		System.setProperty("webdriver.chrome.driver", "./src/test/resources/drivers/chromedriver.exe");
-		// Launch a new Chrome instance
-		driver = new ChromeDriver();
-		// Maximize the browser window
-		driver.manage().window().maximize();
-		// Navigate to HelloWorld
-		//driver.get("http://localhost:8080/HelloWorld/"); //for testing on server
-		driver.get("http://10.118.45.4:8080/HelloWorld/"); //for testing on local machine
+		
 		//Adds the pre-populated users to the arraylist 'users'
-		Collections.addAll(users, user1, user2, user3);
+		Collections.addAll(users, user1, user2); //, user3);
 		//Adds all database entries into the arraylist 'dbUsers'
 		ArrayList<User> dbUsers = dbTest.readData();
 		//displays the number of database entries prior to the test
@@ -61,6 +55,14 @@ public class ChromeTest {
 	//named to be the first @Test alphabetically for junit to run in alpha order
 	public void testOneWebElements() throws InterruptedException, ClassNotFoundException {
 		
+		// Launch a new Chrome instance
+		driver = new ChromeDriver();
+		// Maximize the browser window
+		driver.manage().window().maximize();
+		// Navigate to HelloWorld
+		//driver.get("http://localhost:8080/HelloWorld/"); //for testing on server
+		driver.get("http://10.118.45.4:8080/HelloWorld/"); //for testing on local machine
+				
 		// Maps all the elements on the page according to their 'name' tag
 		WebElement textBoxFirstName = driver.findElement(By.name("firstName"));
 		WebElement textBoxLastName = driver.findElement(By.name("lastName"));
@@ -79,16 +81,9 @@ public class ChromeTest {
 		WebElement buttonRegister = driver.findElement(By.name("btnRegister")); //register button
 		WebElement buttonReset = driver.findElement(By.name("btnReset")); //reset button
 		WebElement buttonAdmin = driver.findElement(By.name("btnSubmit")); //admin button
-		//WebElement element = driver.findElement(By.xpath("/html/body/form/input[4]"));
-
-		Actions action = new Actions(driver);
-		//WebElement we = driver.findElement(By.xpath("html/body/div[13]/ul/li[4]/a"));
-		//action.moveToElement(we).moveToElement(webdriver.findElement(By.xpath("/expression-here"))).click().build().perform();
-		//action.moveToElement(buttonReset).perform();
 		
-
 		// Enters a value for each field, resets the fields, then enters the values again and submits them. Intentional pauses for audience to see what's occuring
-		for (int loop = 0; loop < users.size()-1; loop++)
+		for (int loop = 0; loop < users.size(); loop++)
 		{
 			textBoxFirstName.sendKeys(users.get(loop).getFirstName());
 			textBoxLastName.sendKeys(users.get(loop).getLastName());
@@ -107,13 +102,13 @@ public class ChromeTest {
 			
 			// Pause for audience to see result
 			Thread.sleep(1000);
+			
 			// Logic to demonstrate use of different buttons on the page
-			if (loop+1 < users.size()-1) {
-				//action.moveToElement(buttonReset).build().perform(); //doesnt show cursor move
-				buttonReset.click();
+			if (loop == users.size()-1) {
+				buttonRegister.click();
 			}
 			else {
-				buttonRegister.click();
+				buttonReset.click();
 			}
 		}
 		// Pause for audience to see result
@@ -130,6 +125,9 @@ public class ChromeTest {
 		
 //		assertEquals("http://localhost:8080/HelloWorld/hello", driver.getCurrentUrl());
 		assertEquals("http://10.118.45.4:8080/HelloWorld/hello", driver.getCurrentUrl());
+		
+		// Close the browser
+		driver.quit();
 	}
 	
 	@Test
@@ -137,10 +135,9 @@ public class ChromeTest {
 	public void testTwoDatabaseEntries() throws Exception {
 		ArrayList<User> dbUsers = dbTest.readData();
 		
-		Assert.assertEquals(users.get(users.size()-2).getUserName(), dbUsers.get(dbUsers.size()-1).getUserName());
-		Assert.assertEquals(users.get(users.size()-2).getFirstName(), dbUsers.get(dbUsers.size()-1).getFirstName());
-		Assert.assertEquals(users.get(users.size()-2).getLastName(), dbUsers.get(dbUsers.size()-1).getLastName());
-		System.out.println(users.get(users.size()-2).getUserName() + "  " + dbUsers.get(dbUsers.size()-1).getUserName());
+		Assert.assertEquals(users.get(users.size()-1).getUserName(), dbUsers.get(dbUsers.size()-1).getUserName());
+		Assert.assertEquals(users.get(users.size()-1).getFirstName(), dbUsers.get(dbUsers.size()-1).getFirstName());
+		Assert.assertEquals(users.get(users.size()-1).getLastName(), dbUsers.get(dbUsers.size()-1).getLastName());
 	}
 
 	@After
@@ -152,7 +149,6 @@ public class ChromeTest {
 		// Shows the highest UserId in the database
 		System.out.println("Most recently used UserId is: " + dbUsers.get(dbUsers.size()-1).getUserId());
 		
-		// Close the browser
-		driver.quit();
+		
 	}
 }
