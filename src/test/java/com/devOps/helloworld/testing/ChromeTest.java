@@ -11,9 +11,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.*;
@@ -52,13 +52,13 @@ public class ChromeTest {
 		// Maximize the browser window
 		driver.manage().window().maximize();
 		// Navigate to HelloWorld
-		driver.get("http://localhost:8080/HelloWorld/"); //for testing on server
-		//driver.get("http://10.118.45.4:8080/HelloWorld/"); //for testing on local machine
+		//driver.get("http://localhost:8080/HelloWorld/"); //for testing on server
+		driver.get("http://10.118.45.4:8080/HelloWorld/"); //for testing on local machine
 	}
 
 	@Test
-	public void testWebElements() {
-		// Find the text input element by its name or xpath
+	public void testWebElements() throws InterruptedException, ClassNotFoundException {
+		// Maps all the elements on the page according to their 'name' tag
 		WebElement element1 = driver.findElement(By.name("firstName"));
 		WebElement element2 = driver.findElement(By.name("lastName"));
 		WebElement element3 = driver.findElement(By.name("userName"));
@@ -78,47 +78,53 @@ public class ChromeTest {
 		WebElement element15 = driver.findElement(By.name("btnReset")); //reset button
 		WebElement element17 = driver.findElement(By.name("btnSubmit")); //admin button
 
-		// Enter a value for each field
-		for (int loop = 0; loop < 2; loop++)
-		{
-			element1.sendKeys(FIRSTNAME);
-			element2.sendKeys(LASTNAME);
-			element3.sendKeys(USERNAME);
-			element4.sendKeys(PASSWORD);
-			element16.sendKeys(PASSWORD);
-			element5.sendKeys(ADDRESS1);
-			element6.sendKeys(ADDRESS2);
-			element7.sendKeys(CITY);
-			element8.sendKeys(STATE);
-			element9.sendKeys(ZIPCODE);
-			element10.sendKeys(COUNTRY);
-			element11.sendKeys(EMAIL);
-			element12.sendKeys(PHONE);
-			element13.sendKeys(TITLE);
-			if (loop == 0)
-			{
-				element15.click();
-			}
-			else {
-				element14.click();
-			}
-		}
+		// Enters a value for each field, resets the fields, then enters the values again and submits them
+//		for (int loop = 0; loop < 2; loop++)
+//		{
+//			element1.sendKeys(FIRSTNAME);
+//			element2.sendKeys(LASTNAME);
+//			element3.sendKeys(USERNAME);
+//			element4.sendKeys(PASSWORD);
+//			element16.sendKeys(PASSWORD);
+//			element5.sendKeys(ADDRESS1);
+//			element6.sendKeys(ADDRESS2);
+//			element7.sendKeys(CITY);
+//			element8.sendKeys(STATE);
+//			element9.sendKeys(ZIPCODE);
+//			element10.sendKeys(COUNTRY);
+//			element11.sendKeys(EMAIL);
+//			element12.sendKeys(PHONE);
+//			element13.sendKeys(TITLE);
+//			if (loop == 0)
+//			{
+//				element15.click();
+//			}
+//			else {
+//				Thread.sleep(3000);
+//				element14.click();
+//			}
+//		}
 		
 		
 		
 		try {
 			DbTesting dbTest = new DbTesting();
-			dbTest.readData();
+			System.out.println("^^^ trying to dbTest ^^^^");
+			ArrayList<User> users = dbTest.readData();
+			System.out.println("&&&& " + users.size() + " &&&&");
+			System.out.println(users.get(2).getEmail());
+			System.out.println("_________ dbTest reading works __________");
 		}
 		catch (Exception exception) {
+			System.out.println("****** dbTest reading exception ******");
 			exception.printStackTrace();
 		}
 		
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException exception) {
-			exception.printStackTrace();
-		}
+//		try {
+//			Thread.sleep(3000);
+//		} catch (InterruptedException exception) {
+//			exception.printStackTrace();
+//		}
 
 		// Click the Submit button
 		//element15.sendKeys(Keys.ENTER);		
